@@ -1,0 +1,11 @@
+#ifndef RL_H
+#define RL_H
+
+#define CELL_COLUMNS 40
+#define CELL_ROWS 40
+#define SCALE_CONSTANT 32
+
+#define WINDOW_WIDTH (CELL_COLUMNS * SCALE_CONSTANT)
+#define WINDOW_HEIGHT (CELL_ROWS * SCALE_CONSTANT)
+
+#endif // RL_H
