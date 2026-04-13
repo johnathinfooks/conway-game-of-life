@@ -1,16 +1,15 @@
 #include "shared.h"
+#include <unistd.h>
 
 int main()
 {
-    InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Life");
-    BeginDrawing();
-    while (!WindowShouldClose()) {
-        BeginDrawing();
-        ClearBackground(BLACK);
-        DrawRectangle(1 * SCALE_CONSTANT, 1 * SCALE_CONSTANT, 1 * SCALE_CONSTANT, 1 * SCALE_CONSTANT, LIGHTGRAY);
-        EndDrawing();
+    Environment Env = initEnv();
+    printEnv(Env);
+    while (1) {
+        step(&Env);
+        printEnv(Env);
+        sleep(1);
     }
-    CloseWindow();
 
     return 0;
 }
