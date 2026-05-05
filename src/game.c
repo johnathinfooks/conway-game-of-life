@@ -13,20 +13,51 @@ Environment2D initEnv2D()
         }
     }
 
-    // // optional: initial conditions
-    Env.table[0][0].state = alive;
-    Env.table[1][1].state = alive;
-    Env.table[2][2].state = alive;
-    Env.table[3][3].state = alive;
-    Env.table[4][4].state = alive;
-    Env.table[5][5].state = alive;
+    // NOTE: cool starting options:
 
+    // ====================================================
+    // two gliders dont crash
+    Env.table[4][5].state = alive;
+    Env.table[5][5].state = alive;
+    Env.table[6][5].state = alive;
+    Env.table[6][6].state = alive;
+    Env.table[5][7].state = alive;
+    Env.table[1 + 10][1 + 10].state = alive;
+    Env.table[1 + 10][2 + 10].state = alive;
+    Env.table[1 + 10][3 + 10].state = alive;
+    Env.table[2 + 10][1 + 10].state = alive;
+    Env.table[3 + 10][2 + 10].state = alive;
+
+    // ====================================================
+    // two gliders crashing and die
+    // Env.table[4][5].state = alive;
+    // Env.table[5][5].state = alive;
+    // Env.table[6][5].state = alive;
+    // Env.table[6][6].state = alive;
+    // Env.table[5][7].state = alive;
+    // Env.table[1][1].state = alive;
+    // Env.table[1][2].state = alive;
+    // Env.table[1][3].state = alive;
+    // Env.table[2][1].state = alive;
+    // Env.table[3][2].state = alive;
+    // ====================================================
+    // Env.table[4][5].state = alive;
+    // Env.table[5][5].state = alive;
+    // Env.table[6][5].state = alive;
+    // Env.table[6][6].state = alive;
+    // Env.table[5][7].state = alive;
+    // Env.table[1][2].state = alive;
+    // Env.table[2][1].state = alive;
+    // Env.table[3][1].state = alive;
+    // Env.table[3][2].state = alive;
+    // Env.table[3][3].state = alive;
+    // ====================================================
     // R-pentomino - maximum chaos from minimum cells
-    Env.table[20][21].state = alive;
-    Env.table[20][22].state = alive;
-    Env.table[21][20].state = alive;
-    Env.table[21][21].state = alive;
-    Env.table[22][21].state = alive;
+    // Env.table[20][21].state = alive;
+    // Env.table[20][22].state = alive;
+    // Env.table[21][20].state = alive;
+    // Env.table[21][21].state = alive;
+    // Env.table[22][21].state = alive;
 
     return Env;
 }
@@ -37,13 +68,24 @@ int count_neighbors(Environment2D Env, int pos_x, int pos_y)
 
     for (int i = -1; i < 2; i++) {
         for (int j = -1; j < 2; j++) {
-            if (i == 0 && j == 0) continue;
+            if (i == 0 && j == 0) continue; // do not count self
 
-            int nx = pos_x + i;
-            int ny = pos_y + j;
+            int nx = pos_x + i; // checking pos of x
+            int ny = pos_y + j; // checking pos of y
 
-            if (nx < 0 || nx >= CELL_COLUMNS || ny < 0 || ny >= CELL_ROWS) // if on any edge, don't compute
-                continue;
+            if (nx < 0) {
+                nx = CELL_COLUMNS - 1;
+            }
+            if (nx >= CELL_COLUMNS) {
+                nx = 0;
+            }
+            if (ny < 0) {
+                ny = CELL_COLUMNS - 1;
+            }
+            if (ny >= CELL_COLUMNS) {
+                ny = 0;
+            }
+
 
             if (Env.table[nx][ny].state == alive)
                 count++;

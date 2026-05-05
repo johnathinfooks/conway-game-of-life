@@ -11,7 +11,6 @@ void render2D(Environment2D *Env)
 
     DrawRectangleLines(1, 1, CELL_COLUMNS * SCALE_CONSTANT, CELL_ROWS * SCALE_CONSTANT, WHITE);
 
-
         // print to window
         for (int i = 0; i < CELL_COLUMNS; i++) {
             for (int j = 0; j < CELL_ROWS; j++) {
