@@ -5,6 +5,8 @@
 
 #define WINDOW_NAME "Conway's Game of Life"
 
+#define FRAME_RATE 60
+
 #define CELL_COLUMNS 40
 #define CELL_ROWS 40
 #define SCALE_CONSTANT 32
