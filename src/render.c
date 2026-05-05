@@ -1,15 +1,19 @@
 #include "shared.h"
+#include <raylib.h>
+
+// TODO:
+const int PADDING_PX = 4;
 
 void render2D(Environment2D *Env)
 {
     Color backgroundColor = {38, 38, 38};
     ClearBackground(backgroundColor);
 
-        // print
+        // print to window
         for (int i = 0; i < CELL_COLUMNS; i++) {
             for (int j = 0; j < CELL_ROWS; j++) {
                 if (Env->table[i][j].state == alive) {
-                    DrawRectangle(i * SCALE_CONSTANT, j * SCALE_CONSTANT, 1 * SCALE_CONSTANT, 1 * SCALE_CONSTANT, WHITE);
+                    DrawRectangle(i * SCALE_CONSTANT + PADDING_PX / 2, j * SCALE_CONSTANT + PADDING_PX / 2, SCALE_CONSTANT - PADDING_PX, SCALE_CONSTANT - PADDING_PX, WHITE);
                 } else {};
             }
         }

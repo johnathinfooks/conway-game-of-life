@@ -4,6 +4,8 @@
 
 int main() {
 
+    // TODO: Make all this initializing stuff better and more organized
+
     // raylib rendering
     // init
     InitWindow(GetScreenWidth(), GetScreenHeight(), WINDOW_NAME);
@@ -13,7 +15,7 @@ int main() {
     ToggleFullscreen();
     SetTargetFPS(FRAME_RATE);
     Environment2D Env = initEnv2D();
-    int pause_flag = 0;
+    int pause_flag = 1;
     int frame_count = 0;
     const int TICK_RATE = 6; // Proportional to {FPS / N}
 
