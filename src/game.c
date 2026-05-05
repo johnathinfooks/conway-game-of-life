@@ -1,4 +1,4 @@
-#include <stdio.h>
+// #include <stdio.h>
 #include "rl.h"
 #include "shared.h"
 
@@ -12,12 +12,21 @@ Environment initEnv()
             Env.table[i][j].state = dead;
         }
     }
-    // optional: initial conditions
-    Env.table[19][19].state = alive;
-    Env.table[20][20].state = alive;
-    Env.table[18][21].state = alive;
-    Env.table[19][21].state = alive;
-    Env.table[20][21].state = alive;
+
+    // // optional: initial conditions
+    Env.table[0][0].state = alive;
+    Env.table[1][1].state = alive;
+    Env.table[2][2].state = alive;
+    Env.table[3][3].state = alive;
+    Env.table[4][4].state = alive;
+    Env.table[5][5].state = alive;
+
+// R-pentomino - maximum chaos from minimum cells
+Env.table[20][21].state = alive;
+Env.table[20][22].state = alive;
+Env.table[21][20].state = alive;
+Env.table[21][21].state = alive;
+Env.table[22][21].state = alive;
 
     return Env;
 }
@@ -65,13 +74,14 @@ void step(Environment *Env)
     }
 }
 
-void printEnv(Environment Env)
-{
-    printf("\033[H\033[J");
-    for (int i = 0; i < CELL_COLUMNS; i++) {
-        printf("\n");
-        for (int j = 0; j < CELL_ROWS; j++) {
-            printf("%d ", Env.table[i][j].state);
-        }
-    }
-}
+// useless; raylibc
+// void printEnv(Environment Env)
+// {
+//     printf("\033[H\033[J");
+//     for (int i = 0; i < CELL_COLUMNS; i++) {
+//         printf("\n");
+//         for (int j = 0; j < CELL_ROWS; j++) {
+//             printf("%d ", Env.table[i][j].state);
+//         }
+//     }
+// }

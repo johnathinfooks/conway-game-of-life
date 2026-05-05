@@ -1,5 +1,9 @@
+#include <raylib.h>
+
 #ifndef RL_H
 #define RL_H
+
+#define WINDOW_NAME "Conway's Game of Life"
 
 #define CELL_COLUMNS 40
 #define CELL_ROWS 40
