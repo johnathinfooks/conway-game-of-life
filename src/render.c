@@ -1,13 +1,16 @@
 #include "shared.h"
 #include <raylib.h>
 
-// TODO:
+// TODO: organize
 const int PADDING_PX = 4;
 
 void render2D(Environment2D *Env)
 {
     Color backgroundColor = {38, 38, 38};
     ClearBackground(backgroundColor);
+
+    DrawRectangleLines(1, 1, CELL_COLUMNS * SCALE_CONSTANT, CELL_ROWS * SCALE_CONSTANT, WHITE);
+
 
         // print to window
         for (int i = 0; i < CELL_COLUMNS; i++) {
