@@ -7,29 +7,30 @@ int main() {
 
     // raylib rendering
     // init
-    InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_NAME);
-    SetTargetFPS(8);
-    Environment Env = initEnv();
+    InitWindow(GetScreenWidth(), GetScreenHeight(), WINDOW_NAME);
+    ShowCursor();
+    // ToggleBorderlessWindowed();
+    // SetWindowSize(GetScreenWidth(), GetScreenHeight());
+    ToggleFullscreen();
+    SetTargetFPS(30);
+    Environment2D Env = initEnv2D();
+    int pause_flag = 0;
 
     // loop
     while (!WindowShouldClose()) {
 
+        if (IsKeyPressed(32)) {
+            pause_flag = !pause_flag;
+        }
+
         // drawing
         BeginDrawing();
 
-        Color backgroundColor = {38, 38, 38};
-        ClearBackground(backgroundColor);
+        render2D(&Env);
 
-        // print
-        for (int i = 0; i < CELL_COLUMNS; i++) {
-            for (int j = 0; j < CELL_ROWS; j++) {
-                if (Env.table[i][j].state == alive) {
-                    DrawRectangle(i * SCALE_CONSTANT, j * SCALE_CONSTANT, 1 * SCALE_CONSTANT, 1 * SCALE_CONSTANT, WHITE);
-                } else {};
-            }
+        if (!pause_flag) {
+            step(&Env);
         }
-
-        step(&Env);
 
         EndDrawing();
     }

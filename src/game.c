@@ -2,9 +2,9 @@
 #include "rl.h"
 #include "shared.h"
 
-Environment initEnv()
+Environment2D initEnv2D()
 {
-    Environment Env;
+    Environment2D Env;
     for (int i = 0; i < CELL_COLUMNS; i++) {
         for (int j = 0; j < CELL_ROWS; j++) {
             Env.table[i][j].pos_x = i;
@@ -21,17 +21,17 @@ Environment initEnv()
     Env.table[4][4].state = alive;
     Env.table[5][5].state = alive;
 
-// R-pentomino - maximum chaos from minimum cells
-Env.table[20][21].state = alive;
-Env.table[20][22].state = alive;
-Env.table[21][20].state = alive;
-Env.table[21][21].state = alive;
-Env.table[22][21].state = alive;
+    // R-pentomino - maximum chaos from minimum cells
+    Env.table[20][21].state = alive;
+    Env.table[20][22].state = alive;
+    Env.table[21][20].state = alive;
+    Env.table[21][21].state = alive;
+    Env.table[22][21].state = alive;
 
     return Env;
 }
 
-int count_neighbors(Environment Env, int pos_x, int pos_y)
+int count_neighbors(Environment2D Env, int pos_x, int pos_y)
 {
     int count = 0;
 
@@ -52,7 +52,7 @@ int count_neighbors(Environment Env, int pos_x, int pos_y)
     return count;
 }
 
-void step(Environment *Env)
+void step(Environment2D *Env)
 {
     for (int i = 0; i < CELL_COLUMNS; i++) {
         for (int j = 0; j < CELL_ROWS; j++) {
@@ -75,7 +75,7 @@ void step(Environment *Env)
 }
 
 // useless; raylibc
-// void printEnv(Environment Env)
+// void printEnv2D(Environment2D Env)
 // {
 //     printf("\033[H\033[J");
 //     for (int i = 0; i < CELL_COLUMNS; i++) {

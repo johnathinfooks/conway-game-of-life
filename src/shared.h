@@ -19,15 +19,16 @@ typedef struct {
 typedef struct {
     Cell table[CELL_COLUMNS][CELL_ROWS];
     Cell next[CELL_COLUMNS][CELL_ROWS];
-} Environment;
+} Environment2D;
 
 // FUNCTIONS
 
 // game
 
-Environment initEnv();
-int count_neighbors(Environment Env, int pos_x, int pos_y);
-void step(Environment *Env);
-void printEnv(Environment Env);
+Environment2D initEnv2D();
+int count_neighbors(Environment2D Env, int pos_x, int pos_y);
+void step(Environment2D *Env);
+void printEnv2D(Environment2D Env);
+void render2D(Environment2D *Env);
 
 #endif // SHARED_H
