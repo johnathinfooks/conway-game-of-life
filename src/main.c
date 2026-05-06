@@ -50,24 +50,99 @@
 // }
 
 
-// #include <math.h>
-//
-// int main()
-// {
-//     InitWindow(GetScreenWidth(), GetScreenHeight(), WINDOW_NAME);
-//     Camera3D cam = { 0 };
-//
-//     float time = GetTime();
-//     float rad = 10.0f;
-//     cam.position.x = sinf(time) * rad;
-//     cam.position.z = cosf(time) * rad;
-//     cam.position.y = 5.0f; // Set camera height
-//     cam.target = (Vector3){ 0.0f, 0.0f, 0.0f }; // Look at origin
-//
-//     while (!WindowShouldClose()) {
-//         UpdateCamera(&cam, CAMERA_FREE); // Or skip this if doing manual orbital movement
-//
-//     }
-//
-//     CloseWindow();
-// }
+
+
+
+
+
+
+
+#include "raylib.h"
+#include <math.h>
+
+int pause_flag = 1;
+int frame_count = 0;
+const int TICK_RATE = 4; // Proportional to {FPS / N}
+
+int main(void) {
+    Environment3D Env3D = initEnv3D();
+    InitWindow(GetScreenWidth(), GetScreenHeight(), WINDOW_NAME) ;
+    ShowCursor();
+    ToggleFullscreen();
+
+
+    Camera3D camera = { 0 };
+    camera.target = (Vector3){ 0.0f, 0.0f, 0.0f };
+    camera.up = (Vector3){ 0.0f, 1.0f, 0.0f };
+    camera.fovy = 45.0f;
+    camera.projection = CAMERA_PERSPECTIVE;
+
+    float angle = 0.5f;
+    float pitch = 0.4f;
+    float distance = 24.0f;
+
+    SetTargetFPS(FRAME_RATE);
+
+    while (!WindowShouldClose()) {
+        // Only rotate when left mouse button is held
+        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
+            Vector2 delta = GetMouseDelta();
+            angle += delta.x * 0.005f;
+            pitch -= delta.y * 0.005f;
+
+            if (pitch > 1.5f) pitch = 1.5f;
+            if (pitch < -1.5f) pitch = -1.5f;
+        }
+
+        // Zoom with scroll wheel
+        distance -= GetMouseWheelMove();
+        if (distance < 4.0f) distance = 4.0f;
+
+        // Spherical to cartesian
+        camera.position = (Vector3){
+            cosf(pitch) * sinf(angle) * distance,
+            sinf(pitch) * distance,
+            cosf(pitch) * cosf(angle) * distance
+        };
+
+
+
+
+
+        if (IsKeyPressed(32)) {
+            pause_flag = !pause_flag;
+        }
+
+
+
+
+        BeginDrawing();
+            BeginMode3D(camera);
+                render3D(&Env3D);
+            EndMode3D();
+        EndDrawing();
+    
+
+if (!pause_flag && ++frame_count >= TICK_RATE) {
+            step3D(&Env3D);
+            frame_count = 0;
+        }
+        if (pause_flag) {
+            if (IsKeyPressed(83)) { // s key
+                step3D(&Env3D);
+                render3D(&Env3D);
+            }
+        }
+
+
+
+
+
+
+
+
+    }
+
+    CloseWindow();
+    return 0;
+}

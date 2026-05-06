@@ -76,6 +76,14 @@ Environment3D initEnv3D()
             }
         }
     }
+
+    // initial conditions
+    Env3D.table[0][0][0].state = alive;
+    Env3D.table[1][1][1].state = alive;
+    Env3D.table[2][2][2].state = alive;
+    Env3D.table[3][3][3].state = alive;
+    Env3D.table[4][4][4].state = alive;
+
     return Env3D;
 }
 

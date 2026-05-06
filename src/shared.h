@@ -4,6 +4,7 @@
 #include <raylib.h>
 #include <stdio.h>
 #include "rl.h"
+#include <math.h>
 
 typedef enum {
     alive = 1,

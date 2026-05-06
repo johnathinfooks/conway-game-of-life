@@ -26,13 +26,15 @@ void render3D(Environment3D *Env3D)
     Color backgroundColor = {38, 38, 38};
     ClearBackground(backgroundColor);
 
-    DrawRectangleLines(1, 1, CELL_COLUMNS * SCALE_CONSTANT, CELL_ROWS * SCALE_CONSTANT, WHITE);
+    DrawGrid(50, 2.0f);
 
     // print to window
     for (int i = 0; i < CELL_COLUMNS; i++) {
         for (int j = 0; j < CELL_ROWS; j++) {
             for (int k = 0; k < CELL_DEPTH; k++) {
                 if (Env3D->table[i][j][k].state == alive) {
+                    DrawCube((Vector3){ i - 48.5f, j, k - 48.5f }, 1, 1, 1, WHITE);
+                    DrawCubeWires((Vector3){ i - 48.5f, j, k - 48.5f}, 1, 1, 1, GRAY);
                 }
             }
         }
