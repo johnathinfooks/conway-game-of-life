@@ -17,7 +17,7 @@ int main() {
     Environment2D Env = initEnv2D();
     int pause_flag = 1;
     int frame_count = 0;
-    const int TICK_RATE = 1; // Proportional to {FPS / N}
+    const int TICK_RATE = 4; // Proportional to {FPS / N}
 
     // loop
     while (!WindowShouldClose()) {

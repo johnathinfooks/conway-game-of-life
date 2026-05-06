@@ -17,16 +17,16 @@ Environment2D initEnv2D()
 
     // ====================================================
     // two gliders dont crash
-    Env.table[4][5].state = alive;
-    Env.table[5][5].state = alive;
-    Env.table[6][5].state = alive;
-    Env.table[6][6].state = alive;
-    Env.table[5][7].state = alive;
-    Env.table[1 + 10][1 + 10].state = alive;
-    Env.table[1 + 10][2 + 10].state = alive;
-    Env.table[1 + 10][3 + 10].state = alive;
-    Env.table[2 + 10][1 + 10].state = alive;
-    Env.table[3 + 10][2 + 10].state = alive;
+    // Env.table[4][5].state = alive;
+    // Env.table[5][5].state = alive;
+    // Env.table[6][5].state = alive;
+    // Env.table[6][6].state = alive;
+    // Env.table[5][7].state = alive;
+    // Env.table[1 + 10][1 + 10].state = alive;
+    // Env.table[1 + 10][2 + 10].state = alive;
+    // Env.table[1 + 10][3 + 10].state = alive;
+    // Env.table[2 + 10][1 + 10].state = alive;
+    // Env.table[3 + 10][2 + 10].state = alive;
 
     // ====================================================
     // two gliders crashing and die
@@ -41,6 +41,7 @@ Environment2D initEnv2D()
     // Env.table[2][1].state = alive;
     // Env.table[3][2].state = alive;
     // ====================================================
+    // random chaos
     // Env.table[4][5].state = alive;
     // Env.table[5][5].state = alive;
     // Env.table[6][5].state = alive;
@@ -53,11 +54,11 @@ Environment2D initEnv2D()
     // Env.table[3][3].state = alive;
     // ====================================================
     // R-pentomino - maximum chaos from minimum cells
-    // Env.table[20][21].state = alive;
-    // Env.table[20][22].state = alive;
-    // Env.table[21][20].state = alive;
-    // Env.table[21][21].state = alive;
-    // Env.table[22][21].state = alive;
+    Env.table[20][21].state = alive;
+    Env.table[20][22].state = alive;
+    Env.table[21][20].state = alive;
+    Env.table[21][21].state = alive;
+    Env.table[22][21].state = alive;
 
     return Env;
 }
