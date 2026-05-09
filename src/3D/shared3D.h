@@ -5,12 +5,13 @@
 
 #include "../../lib/raylib.h"
 #include <math.h>
+#include <stdint.h>
 
 // game
 
-#define CELL_COLUMNS 24
-#define CELL_ROWS 24
-#define CELL_DEPTH 24
+#define CELL_COLUMNS 32
+#define CELL_ROWS 32
+#define CELL_DEPTH 32
 
 typedef enum {
     alive3D = 1,
@@ -19,9 +20,9 @@ typedef enum {
 
 typedef struct {
     State3D state;
-    int pos_x;
-    int pos_y;
-    int pos_z;
+    uint8_t pos_x;
+    uint8_t pos_y;
+    uint8_t pos_z;
 } Cell3D;
 
 typedef struct {

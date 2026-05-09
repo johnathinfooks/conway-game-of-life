@@ -26,7 +26,7 @@ Environment3D initEnv3D()
     return Env3D;
 }
 
-int countNeighbors3D(Environment3D Env3D, int pos_x, int pos_y, int pos_z)
+int countNeighbors3D(Environment3D *Env3D, int pos_x, int pos_y, int pos_z)
 {
     int count = 0;
 
@@ -53,7 +53,7 @@ int countNeighbors3D(Environment3D Env3D, int pos_x, int pos_y, int pos_z)
                 //     ny = 0;
                 // }
 
-                if (Env3D.table[nx][ny][nz].state == alive3D)
+                if (Env3D->table[nx][ny][nz].state == alive3D)
                     count++;
             }
         }
@@ -67,7 +67,7 @@ void step3D(Environment3D *Env3D)
         for (int j = 0; j < CELL_ROWS; j++) {
             for (int k = 0; k < CELL_DEPTH; k++) {
 
-                int neighbors = countNeighbors3D(*Env3D, Env3D->table[i][j][k].pos_x, Env3D->table[i][j][k].pos_y, Env3D->table[i][j][k].pos_z);
+                int neighbors = countNeighbors3D(Env3D, Env3D->table[i][j][k].pos_x, Env3D->table[i][j][k].pos_y, Env3D->table[i][j][k].pos_z);
                 if (neighbors < 7 || neighbors > 10) {
                     Env3D->next[i][j][k].state = dead3D;
                 } else if (neighbors >= 7 && neighbors <= 10) {
