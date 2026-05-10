@@ -48,6 +48,51 @@ void init2D() {
     }
 }
 
+void R_init2D() {
+
+    // raylib init
+
+    InitWindow(GetScreenWidth(), GetScreenHeight(), "Conway's Game of Life 2D");
+    ShowCursor();
+    ToggleFullscreen();
+    const int FRAME_RATE_2D = 60;
+    SetTargetFPS(FRAME_RATE_2D);
+
+    // game init
+
+    Environment2D Env = R_initEnv2D();
+    const int TICK_RATE_2D = 4; // priportional to {FPS / N}
+
+    // runtime loop
+
+    int pauseFlag = 1;
+    int frameCount = 0;
+
+    while (!WindowShouldClose()) {
+
+        if (IsKeyPressed(32)) {         // space key
+            pauseFlag = !pauseFlag;
+        }
+
+        BeginDrawing();
+
+        render2D(&Env);
+
+        if (!pauseFlag && ++frameCount >= TICK_RATE_2D) {
+            R_step2D(&Env);
+            frameCount = 0;
+        }
+        if (pauseFlag) {
+            if (IsKeyPressed(83)) {     // s key
+                R_step2D(&Env);
+                render2D(&Env);
+            }
+        }
+
+        EndDrawing();
+    }
+}
+
 void init3D() {
 
     // raylib init
@@ -66,7 +111,7 @@ void init3D() {
 
     float angle = 0.5f;
     float pitch = 0.4f;
-    float distance = 56.0f;
+    float distance = 150.0f;
 
     // game init
 
@@ -130,6 +175,7 @@ char *helpString =  "\nconw {input option}"
                     "\n - info  : Prints program information"
                     "\n - 2d    : initiates simulation in 2 dimensions of space"
                     "\n - 3d    : initiates simulation in 3 dimensions of space"
+                    "\n - rsch  : initiates research simulation"
                     "\n\n";
 
 char *infoString =  "\nConway's Game of Life"
@@ -152,6 +198,9 @@ int main(int argc, char *argv[]) {
     }
     else if (argc == 2 && strcmp(argv[1], "3d") == 0) {
         init3D();
+    }
+    else if (argc == 2 && strcmp(argv[1], "rsch") == 0) {
+        R_init2D();
     }
     else {
         printf("\nInvalid Input. Use 'help' for help.\n\n");

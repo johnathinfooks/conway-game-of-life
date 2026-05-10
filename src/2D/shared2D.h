@@ -36,4 +36,9 @@ void step2D(Environment2D *Env);
 
 void render2D(Environment2D *Env);
 
+// research
+
+void R_step2D(Environment2D *Env);
+Environment2D R_initEnv2D();
+
 #endif // SHARED2D_H

@@ -9,9 +9,9 @@
 
 // game
 
-#define CELL_COLUMNS 32
-#define CELL_ROWS 32
-#define CELL_DEPTH 32
+#define CELL_COLUMNS 56
+#define CELL_ROWS 56
+#define CELL_DEPTH 56
 
 typedef enum {
     alive3D = 1,
