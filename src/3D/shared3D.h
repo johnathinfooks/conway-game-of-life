@@ -23,6 +23,7 @@ typedef struct {
     uint8_t pos_x;
     uint8_t pos_y;
     uint8_t pos_z;
+    uint8_t neighborCount;
 } Cell3D;
 
 typedef struct {

@@ -2,30 +2,6 @@
 #include <stdlib.h>
 #include <time.h>
 
-Environment3D initEnv3D()
-{
-    Environment3D Env3D;
-    for (int i = 0; i < CELL_COLUMNS; i++) {
-        for (int j = 0; j < CELL_ROWS; j++) {
-            for (int k = 0; k < CELL_DEPTH; k++) {
-                Env3D.table[i][j][k].pos_x = i;
-                Env3D.table[i][j][k].pos_y = j;
-                Env3D.table[i][j][k].pos_z = k;
-                Env3D.table[i][j][k].state = dead3D;
-            }
-        }
-    }
-
-    // random initial conditions
-    srand(time(NULL));
-    for (int i = 0; i < CELL_COLUMNS; i++)
-        for (int j = 0; j < CELL_ROWS; j++)
-            for (int k = 0; k < CELL_DEPTH; k++)
-                if (rand() % 10 < 1.1) Env3D.table[i][j][k].state = alive3D;
-
-    return Env3D;
-}
-
 int countNeighbors3D(Environment3D *Env3D, int pos_x, int pos_y, int pos_z)
 {
     int count = 0;
@@ -61,6 +37,35 @@ int countNeighbors3D(Environment3D *Env3D, int pos_x, int pos_y, int pos_z)
     return count;
 }
 
+Environment3D initEnv3D()
+{
+    Environment3D Env3D;
+    for (int i = 0; i < CELL_COLUMNS; i++) {
+        for (int j = 0; j < CELL_ROWS; j++) {
+            for (int k = 0; k < CELL_DEPTH; k++) {
+                Env3D.table[i][j][k].pos_x = i;
+                Env3D.table[i][j][k].pos_y = j;
+                Env3D.table[i][j][k].pos_z = k;
+                Env3D.table[i][j][k].state = dead3D;
+            }
+        }
+    }
+
+    // random initial conditions
+    srand(time(NULL));
+    for (int i = 0; i < CELL_COLUMNS; i++)
+        for (int j = 0; j < CELL_ROWS; j++)
+            for (int k = 0; k < CELL_DEPTH; k++)
+                if (rand() % 10 < 1.1) Env3D.table[i][j][k].state = alive3D;
+
+    for (int i = 0; i < CELL_COLUMNS; i++)
+        for (int j = 0; j < CELL_ROWS; j++)
+            for (int k = 0; k < CELL_DEPTH; k++)
+                Env3D.table[i][j][k].neighborCount = countNeighbors3D(&Env3D, i, j, k);
+
+    return Env3D;
+}
+
 void step3D(Environment3D *Env3D)
 {
     for (int i = 0; i < CELL_COLUMNS; i++) {
@@ -68,6 +73,7 @@ void step3D(Environment3D *Env3D)
             for (int k = 0; k < CELL_DEPTH; k++) {
 
                 int neighbors = countNeighbors3D(Env3D, Env3D->table[i][j][k].pos_x, Env3D->table[i][j][k].pos_y, Env3D->table[i][j][k].pos_z);
+                Env3D->next[i][j][k].neighborCount = neighbors;
                 if (neighbors < 7 || neighbors > 10) {
                     Env3D->next[i][j][k].state = dead3D;
                 } else if (neighbors >= 7 && neighbors <= 10) {
@@ -86,5 +92,10 @@ void step3D(Environment3D *Env3D)
             }
         }
     }
+
+    for (int i = 0; i < CELL_COLUMNS; i++)
+        for (int j = 0; j < CELL_ROWS; j++)
+            for (int k = 0; k < CELL_DEPTH; k++)
+                Env3D->table[i][j][k].neighborCount = countNeighbors3D(Env3D, i, j, k);
 }
 
